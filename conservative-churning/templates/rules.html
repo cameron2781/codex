@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Issuer Rules</h2>
+<table>
+  <tr><th>Issuer</th><th>Evaluation</th><th>Reason</th><th>Snapshot Date</th></tr>
+  {% for result in results %}
+  <tr>
+    <td>{{ result.issuer }}</td>
+    <td class="{{ result.status }}">{{ result.status }}</td>
+    <td>{{ result.reason }}</td>
+    <td>{{ result.snapshot_date }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h3>Research Snapshots</h3>
+<ul>
+{% for snap in snapshots %}
+  <li>{{ snap.issuer }} ({{ snap.snapshot_date }}): <a href="{{ snap.source_url }}">source</a> — {{ snap.summary }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

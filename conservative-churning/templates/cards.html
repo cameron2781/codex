@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Cards</h2>
+<table>
+  <tr><th>Card</th><th>Issuer</th><th>Status</th><th>Open Date</th><th>Close Date</th></tr>
+  {% for card in cards %}
+  <tr>
+    <td><a href="/cards/{{ card.id }}">{{ card.name }}</a></td>
+    <td>{{ card.issuer }}</td>
+    <td>{{ card.status }}</td>
+    <td>{{ card.open_date }}</td>
+    <td>{{ card.close_date or '-' }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

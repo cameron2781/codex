@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ card.name }} ({{ card.issuer }})</h2>
+<p>Status: <strong>{{ card.status }}</strong></p>
+<p>Opened: {{ card.open_date }} | Closed: {{ card.close_date or '-' }}</p>
+<p>Annual Fee: ${{ '%.2f' % (card.annual_fee_cents / 100) }}</p>
+
+{% if spend_progress %}
+  <h3>Signup Bonus Window</h3>
+  <p>Spent ${{ '%.2f' % (spend_progress.spent_cents / 100) }} of ${{ '%.2f' % (spend_progress.required_spend_cents / 100) }} by {{ spend_progress.deadline_date }}</p>
+{% endif %}
+
+<h3>Timeline</h3>
+<ul>
+{% for event in timeline %}
+  <li>{{ event.event_date }} — {{ event.event_type }}: {{ event.details }}</li>
+{% else %}
+  <li>No timeline events yet.</li>
+{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ card.name }} ({{ card.issuer }})</h2>
+<p>Status: <strong>{{ card.lifecycle_status }}</strong></p>
+<p>Annual fee: {{ card.annual_fee_cents|money }}</p>
+
+<h3>Timeline</h3>
+<ul>
+  {% for event in timeline %}
+  <li>{{ event.event_date }} — {{ event.event_type }} ({{ event.details }})</li>
+  {% else %}
+  <li>No timeline events yet.</li>
+  {% endfor %}
+</ul>
+
+<h3>Spend History</h3>
+<table>
+  <tr><th>Date</th><th>Amount</th><th>Category</th><th>Memo</th></tr>
+  {% for spend in spends %}
+  <tr>
+    <td>{{ spend.posted_on }}</td>
+    <td>{{ spend.amount_cents|money }}</td>
+    <td>{{ spend.category }}</td>
+    <td>{{ spend.memo or '-' }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

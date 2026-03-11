@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<p><strong>Gross rewards:</strong> {{ gross_value|money }} | <strong>Net rewards:</strong> {{ net_value|money }}</p>
+
+<h3>Upcoming actions</h3>
+<ul>
+  {% for alert in alerts %}
+    <li class="{{ alert.severity }}">{{ alert.message }}</li>
+  {% else %}
+    <li>No pending alerts.</li>
+  {% endfor %}
+</ul>
+
+<h3>Active cards</h3>
+<table>
+  <tr><th>Card</th><th>Status</th><th>Spend Progress</th><th>Bonus End</th></tr>
+  {% for card in active_cards %}
+  <tr>
+    <td><a href="/cards/{{ card.id }}">{{ card.name }}</a></td>
+    <td>{{ card.lifecycle_status }}</td>
+    <td>{{ card.spent_cents|money }} / {{ card.required_spend_cents|money }}</td>
+    <td>{{ card.end_date or '-' }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h3>Issuer eligibility snapshot</h3>
+<ul>
+  {% for row in rule_results %}
+    <li class="{{ row.result }}">{{ row.issuer }}: {{ row.result }} — {{ row.reason }} (snapshot {{ row.rule_snapshot_date }})</li>
+  {% endfor %}
+</ul>
+{% endblock %}

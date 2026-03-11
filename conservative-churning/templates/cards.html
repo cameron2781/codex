@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Active Cards</h2>
+<table>
+  <tr><th>Card</th><th>Status</th><th>Opened</th><th>Spend Progress</th><th>Actions</th></tr>
+  {% for c in cards %}
+  <tr>
+    <td>{{ c.issuer }} {{ c.name }}</td>
+    <td>{{ c.status }}</td>
+    <td>{{ c.opened_on }}</td>
+    <td>{{ money(c.total_spend) }} / {{ money(c.required_spend_cents or 0) }} by {{ c.deadline_on or '-' }}</td>
+    <td><a href="/cards/{{ c.id }}">Detail</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

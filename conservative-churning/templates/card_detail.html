@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ detail.card.issuer }} {{ detail.card.name }}</h2>
+<p>Status: <strong>{{ detail.card.status }}</strong></p>
+<p>Total spend: <strong>{{ money(detail.total_spend) }}</strong></p>
+{% if detail.bonus %}
+<p>Bonus window: {{ money(detail.bonus.required_spend_cents) }} by {{ detail.bonus.deadline_on }} ({{ detail.bonus.status }})</p>
+{% endif %}
+
+<h3>Timeline</h3>
+<ul>
+  {% for when, event, status in detail.timeline %}
+  <li>{{ when }} — {{ event }} ({{ status }})</li>
+  {% endfor %}
+</ul>
+
+<h3>Spend History</h3>
+<ul>
+  {% for s in detail.spends %}
+  <li>{{ s.spent_on }} — {{ money(s.amount_cents) }} ({{ s.note }})</li>
+  {% else %}
+  <li>No spend entries.</li>
+  {% endfor %}
+</ul>
+
+<h3>Reward Ledger</h3>
+<ul>
+  {% for r in detail.rewards %}
+  <li>{{ r.entry_on }} — gross {{ money(r.gross_value_cents) }}, fee {{ money(r.annual_fee_cents) }}, net {{ money(r.net_value_cents) }}</li>
+  {% else %}
+  <li>No reward entries.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Active Card List</h2>
+<table>
+  <tr><th>Card</th><th>Issuer</th><th>Status</th><th>Opened</th><th>Spend</th><th>Window End</th></tr>
+  {% for card in cards %}
+  <tr>
+    <td><a href="/cards/{{ card.id }}">{{ card.name }}</a></td>
+    <td>{{ card.issuer }}</td>
+    <td>{{ card.lifecycle_status }}</td>
+    <td>{{ card.opened_on }}</td>
+    <td>{{ card.spent_cents|money }} / {{ card.required_spend_cents|money }}</td>
+    <td>{{ card.end_date or '-' }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

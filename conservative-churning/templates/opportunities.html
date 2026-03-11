@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Opportunities Queue</h2>
+<table>
+  <tr><th>Issuer</th><th>Card</th><th>Bonus Value</th><th>Min Spend</th><th>Issuer Rule</th></tr>
+  {% for item in opportunities %}
+  <tr>
+    <td>{{ item.card.issuer }}</td>
+    <td>{{ item.card.name }}</td>
+    <td>{{ item.card.conservative_cash_value_cents|money }}</td>
+    <td>{{ item.card.min_spend_cents|money }} in {{ item.card.min_spend_days }} days</td>
+    <td class="{{ item.issuer_status.result }}">{{ item.issuer_status.result }} — {{ item.issuer_status.reason }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

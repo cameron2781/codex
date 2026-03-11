@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Issuer Rule Snapshots</h2>
+{% for row in results %}
+  <h3>{{ row.issuer }} — <span class="{{ row.result }}">{{ row.result }}</span></h3>
+  <p>{{ row.reason }} (snapshot date {{ row.rule_snapshot_date }})</p>
+  <ul>
+    {% for rule in row.rules %}
+      <li><strong>{{ rule.rule_name }}</strong>: {{ rule.rule_logic }} — {{ rule.source_title }} ({{ rule.source_date }})</li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+{% endblock %}

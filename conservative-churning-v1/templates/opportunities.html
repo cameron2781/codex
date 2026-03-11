@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Opportunities Queue</h2>
+<table>
+  <tr><th>Card</th><th>Issuer</th><th>Gross Value (cents)</th><th>Net Value (cents)</th><th>Rule</th><th>Reason</th><th>Snapshot</th></tr>
+  {% for row in rows %}
+  <tr>
+    <td>{{ row.card.name }}</td>
+    <td>{{ row.card.issuer }}</td>
+    <td>{{ row.gross }}</td>
+    <td>{{ row.net }}</td>
+    <td>{{ row.rule.status if row.rule else 'unknown' }}</td>
+    <td>{{ row.rule.reason if row.rule else 'No rule snapshot' }}</td>
+    <td>{{ row.rule.snapshot_date if row.rule else '-' }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

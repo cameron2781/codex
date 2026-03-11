@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard ({{ today.isoformat() }})</h2>
+<ul>
+  <li>Active cards: {{ totals.active_cards }}</li>
+  <li>Net reward value (cents): {{ totals.net_rewards }}</li>
+  <li>Pending alerts in table: {{ alerts|length }}</li>
+</ul>
+
+<h3>Alerts</h3>
+<table>
+  <tr><th>Type</th><th>Due</th><th>Status</th><th>Detail</th></tr>
+  {% for alert in alerts %}
+  <tr>
+    <td>{{ alert.title }}</td>
+    <td>{{ alert.due_on }}</td>
+    <td>{{ alert.status }}</td>
+    <td>{{ alert.detail }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h3>Issuer Rule Status</h3>
+<table>
+  <tr><th>Issuer</th><th>Status</th><th>Reason</th><th>Snapshot</th></tr>
+  {% for rule in rules %}
+  <tr>
+    <td>{{ rule.issuer }}</td>
+    <td>{{ rule.status }}</td>
+    <td>{{ rule.reason }}</td>
+    <td>{{ rule.snapshot_date }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

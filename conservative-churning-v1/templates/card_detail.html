@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ card.name }} ({{ card.issuer }})</h2>
+<p>Status: {{ card.status }} | Opened: {{ card.opened_on }}</p>
+
+<h3>Signup Bonus Window</h3>
+{% if bonus %}
+<p>{{ bonus.starts_on }} to {{ bonus.ends_on }} | {{ bonus.status }} | target {{ bonus.target_bonus_points }} points</p>
+{% else %}
+<p>No bonus window data.</p>
+{% endif %}
+
+<h3>Spend History</h3>
+<ul>
+  {% for spend in spends %}
+    <li>{{ spend.spent_on }}: {{ spend.amount_cents }} ({{ spend.memo }})</li>
+  {% endfor %}
+</ul>
+
+<h3>Annual Fee Timeline</h3>
+<ul>
+  {% for fee in fees %}
+    <li>Posted {{ fee.fee_posted_on }}: {{ fee.fee_cents }} due-review {{ fee.due_review_on }} resolution {{ fee.resolution or 'pending' }}</li>
+  {% endfor %}
+</ul>
+
+<h3>Reward Ledger</h3>
+<ul>
+  {% for entry in ledger %}
+    <li>{{ entry.posted_on }} {{ entry.entry_type }} gross {{ entry.gross_value_cents }} net {{ entry.net_value_cents }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

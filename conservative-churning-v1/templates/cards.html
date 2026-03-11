@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Active Cards</h2>
+<table>
+  <tr><th>Card</th><th>Status</th><th>Opened</th><th>Spend (cents)</th><th>Bonus Progress</th></tr>
+  {% for row in rows %}
+  {% set window = windows.get(row.id) %}
+  <tr>
+    <td><a href="/cards/{{ row.id }}">{{ row.name }}</a></td>
+    <td>{{ row.status }}</td>
+    <td>{{ row.opened_on }}</td>
+    <td>{{ row.spent_cents }}</td>
+    <td>
+      {% if window %}
+        {{ row.spent_cents }} / {{ window.min_spend_cents }} due {{ window.ends_on }}
+      {% else %}
+        n/a
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

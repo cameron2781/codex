@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Conservative Churning Tracker</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 24px; }
+      nav a { margin-right: 12px; }
+      .blocked { color: #a80000; font-weight: bold; }
+      .warning { color: #8a5a00; font-weight: bold; }
+      .eligible { color: #007700; font-weight: bold; }
+      table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+      th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+      .card { border: 1px solid #ddd; padding: 12px; margin-bottom: 10px; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <h1>Conservative Churning Tracker</h1>
+    <nav>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/opportunities">Opportunities</a>
+      <a href="/cards">Cards</a>
+      <a href="/rules">Rules</a>
+    </nav>
+    <hr />
+    {% block content %}{% endblock %}
+  </body>
+</html>

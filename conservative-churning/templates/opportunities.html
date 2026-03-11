@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Opportunities Queue</h2>
+<p>Conservative candidates based on current manual rule snapshots.</p>
+
+<table>
+  <tr><th>Issuer</th><th>Card</th><th>Bonus</th><th>Annual Fee</th><th>Status</th></tr>
+  {% for card in cards %}
+    <tr>
+      <td>{{ card.issuer }}</td>
+      <td>{{ card.name }}</td>
+      <td>${{ '%.2f' % (card.cash_value_estimate_cents / 100) }}</td>
+      <td>${{ '%.2f' % (card.annual_fee_cents / 100) }}</td>
+      <td>candidate</td>
+    </tr>
+  {% endfor %}
+</table>
+
+<h3>Issuer Gate Summary</h3>
+<ul>
+{% for result in rules %}
+  <li><span class="{{ result.status }}">{{ result.issuer }}: {{ result.status }}</span> — {{ result.reason }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

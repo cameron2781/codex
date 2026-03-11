@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+<p><strong>Net cash-equivalent reward value:</strong> ${{ '%.2f' % (net_value / 100) }}</p>
+
+<h3>Open Alerts</h3>
+{% for alert in alerts %}
+  <div class="card">
+    <strong>{{ alert.alert_type }}</strong> ({{ alert.severity }}) — due {{ alert.due_date }}<br />
+    {{ alert.message }}
+  </div>
+{% else %}
+  <p>No open alerts.</p>
+{% endfor %}
+
+<h3>Active Cards</h3>
+<ul>
+{% for card in active_cards %}
+  <li><a href="/cards/{{ card.id }}">{{ card.name }}</a> — {{ card.status }} (opened {{ card.open_date }})</li>
+{% else %}
+  <li>No active cards.</li>
+{% endfor %}
+</ul>
+
+<h3>Rule Status</h3>
+<ul>
+{% for result in rules %}
+  <li><span class="{{ result.status }}">{{ result.issuer }}: {{ result.status }}</span> — {{ result.reason }} ({{ result.snapshot_date }})</li>
+{% endfor %}
+</ul>
+{% endblock %}

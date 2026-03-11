@@ -1,0 +1,4 @@
+body { font-family: sans-serif; margin: 20px; }
+nav a { margin-right: 12px; }
+table { border-collapse: collapse; margin-bottom: 20px; width: 100%; }
+th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }

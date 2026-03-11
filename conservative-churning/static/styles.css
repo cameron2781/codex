@@ -1,0 +1,6 @@
+body { font-family: Arial, sans-serif; margin: 2rem; background: #fafafa; color: #222; }
+nav a { margin-right: 1rem; }
+table { width: 100%; border-collapse: collapse; background: white; margin-bottom: 1.5rem; }
+th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+section { background: white; padding: 1rem; border: 1px solid #ddd; }

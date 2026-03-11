@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<div class="grid">
+  <section>
+    <h3>Portfolio</h3>
+    <p>Active cards: <strong>{{ data.active_cards }}</strong></p>
+    <p>Gross rewards: <strong>{{ money(data.gross) }}</strong></p>
+    <p>Net rewards: <strong>{{ money(data.net) }}</strong></p>
+  </section>
+  <section>
+    <h3>Rule status</h3>
+    <ul>
+    {% for r in data.rule_results %}
+      <li><strong>{{ r.issuer }}</strong>: {{ r.status }} — {{ r.reason }} ({{ r.snapshot_date }})</li>
+    {% endfor %}
+    </ul>
+  </section>
+</div>
+<section>
+  <h3>Upcoming actions</h3>
+  <table>
+    <tr><th>Type</th><th>Due</th><th>Message</th></tr>
+    {% for a in data.alerts %}
+    <tr>
+      <td>{{ a.alert_type }}</td><td>{{ a.due_on or '-' }}</td><td>{{ a.message }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="3">No open alerts.</td></tr>
+    {% endfor %}
+  </table>
+</section>
+{% endblock %}

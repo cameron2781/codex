@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Opportunities Queue</h2>
+<table>
+  <tr><th>Issuer</th><th>Card</th><th>Bonus</th><th>Annual Fee</th><th>Eligibility</th><th>Rule Date</th></tr>
+  {% for item in cards %}
+  <tr>
+    <td>{{ item.card.issuer }}</td>
+    <td>{{ item.card.name }}</td>
+    <td>{{ money(item.card.bonus_value_cents) }}</td>
+    <td>{{ money(item.card.annual_fee_cents) }}</td>
+    <td>{{ item.rule.status }} — {{ item.rule.reason }}</td>
+    <td>{{ item.rule.snapshot_date }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

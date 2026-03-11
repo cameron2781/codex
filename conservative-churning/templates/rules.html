@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Issuer Rule Snapshots</h2>
+<table>
+  <tr><th>Issuer</th><th>Rule</th><th>Summary</th><th>Source</th><th>Captured</th></tr>
+  {% for row in rows %}
+  <tr>
+    <td>{{ row.issuer }}</td>
+    <td>{{ row.rule_key }}</td>
+    <td>{{ row.summary }}</td>
+    <td><a href="{{ row.source_url }}">{{ row.source_name }}</a></td>
+    <td>{{ row.captured_on }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
